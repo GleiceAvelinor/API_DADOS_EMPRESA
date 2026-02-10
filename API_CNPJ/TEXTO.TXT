@@ -1,0 +1,31 @@
+Esse código é um exemplo clássico de como consumir uma API (uma ponte que conecta seu código a um servidor externo) 
+para buscar informações automáticas sobre uma empresa usando o CNPJ.
+
+Aqui está o passo a passo detalhado:
+
+1. Importação da Biblioteca
+import requests O Python, por padrão, não sabe "navegar na internet". 
+A biblioteca Requests é a ferramenta que permite que seu script envie e receba dados da web (protocolo HTTP).
+Sem ela, você não conseguiria fazer o pedido ao site.
+
+2. Definição do Alvo
+cnpj = "49364413000144" Aqui você cria uma variável para guardar o número do CNPJ que deseja consultar.
+
+Nota: Nesse caso, o CNPJ pertence à própria Google Brasil.
+
+3. Montagem da URL
+url = f"https://publica.cnpj.ws/cnpj/{cnpj}" 
+Você está construindo o "endereço" de onde a informação será retirada. O f antes das aspas permite que você insira a variável {cnpj} diretamente dentro do texto. 
+A URL final que o código acessará será: https://publica.cnpj.ws/cnpj/49364413000144.
+
+4. A Requisição (O Pedido)
+requisicao = requests.get(url) É aqui que a mágica acontece.
+O comando .get(url) faz o seu computador "bater na porta" do servidor da API e pedir os dados. O servidor processa o pedido e devolve uma resposta, que fica guardada na variável requisicao.
+
+5. Tradução dos Dados
+dados = requisicao.json() Os dados que vêm da internet geralmente chegam em um formato bruto. 
+O método .json() converte essa resposta em um Dicionário do Python, tornando muito fácil acessar informações específicas (como nome da empresa, endereço, etc.) usando chaves.
+
+6. Exibição do Resultado
+print(dados) Por fim, o código imprime no console todo o conteúdo recebido. 
+Você verá um grande bloco de texto com detalhes como Razão Social, CNAE, Capital Social e situação cadastral.
